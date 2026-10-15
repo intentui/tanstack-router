@@ -36,7 +36,7 @@ const Avatar = ({
       data-slot="avatar"
       {...props}
       className={twMerge(
-        "inline-grid size-(--avatar-size) shrink-0 align-middle outline-1 outline-fg/(--ring-opacity) -outline-offset-1 [--avatar-radius:20%] [--ring-opacity:20%] *:col-start-1 *:row-start-1 *:size-(--avatar-size)",
+        "inline-grid size-(--avatar-size) shrink-0 align-middle outline-1 outline-foreground/(--ring-opacity) -outline-offset-1 [--avatar-radius:20%] [--ring-opacity:20%] *:col-start-1 *:row-start-1 *:size-(--avatar-size)",
         size === "xs" && "[--avatar-size:--spacing(5)]",
         size === "sm" && "[--avatar-size:--spacing(6)]",
         size === "md" && "[--avatar-size:--spacing(8)]",
@@ -49,7 +49,7 @@ const Avatar = ({
         size === "6xl" && "[--avatar-size:--spacing(28)]",
         size === "7xl" && "[--avatar-size:--spacing(32)]",
         size === "8xl" && "[--avatar-size:--spacing(36)]",
-        size === "9xl" && "[--avatar-size:--spacing(32)]",
+        size === "9xl" && "[--avatar-size:--spacing(42)]",
         isSquare
           ? "rounded-(--avatar-radius) *:rounded-(--avatar-radius)"
           : "rounded-full *:rounded-full",

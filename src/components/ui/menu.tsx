@@ -1,7 +1,6 @@
 "use client"
 
 import { CheckIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
-import { Button, type ButtonProps } from "react-aria-components/Button"
 import { Collection } from "react-aria-components/Collection"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import { Header } from "react-aria-components/Header"
@@ -9,7 +8,6 @@ import type {
   MenuItemProps as MenuItemPrimitiveProps,
   MenuProps as MenuPrimitiveProps,
   MenuSectionProps as MenuSectionPrimitiveProps,
-  MenuTriggerProps as MenuTriggerPrimitiveProps,
 } from "react-aria-components/Menu"
 import {
   MenuItem as MenuItemPrimitive,
@@ -29,40 +27,22 @@ import {
   dropdownItemStyles,
   dropdownSectionStyles,
 } from "./dropdown"
-import { PopoverContent, type PopoverContentProps } from "./popover"
+import { Popover, type PopoverProps } from "./popover"
 import { createLink } from "@tanstack/react-router"
 
-const Menu = (props: MenuTriggerPrimitiveProps) => <MenuTriggerPrimitive {...props} />
+const MenuTrigger = MenuTriggerPrimitive
 
-const MenuSubMenu = ({ delay = 0, ...props }) => (
-  <SubmenuTriggerPrimitive {...props} delay={delay}>
-    {props.children}
-  </SubmenuTriggerPrimitive>
+const MenuSubMenu = ({
+  delay = 0,
+  ...props
+}: React.ComponentProps<typeof SubmenuTriggerPrimitive>) => (
+  <SubmenuTriggerPrimitive {...props} delay={delay} />
 )
 
-interface MenuTriggerProps extends ButtonProps {
-  ref?: React.Ref<HTMLButtonElement>
-}
-
-const MenuTrigger = ({ className, ref, ...props }: MenuTriggerProps) => (
-  <Button
-    ref={ref}
-    data-slot="menu-trigger"
-    className={cx(
-      "relative inline text-start outline-hidden focus-visible:ring-1 focus-visible:ring-primary",
-      "*:data-[slot=chevron]:size-5 sm:*:data-[slot=chevron]:size-4",
-      className,
-    )}
-    {...props}
-  />
-)
-
-interface MenuContentProps<T>
-  extends MenuPrimitiveProps<T>,
-    Pick<PopoverContentProps, "placement"> {
+interface MenuProps<T> extends MenuPrimitiveProps<T>, Pick<PopoverProps, "placement"> {
   className?: string
   popover?: Pick<
-    PopoverContentProps,
+    PopoverProps,
     | "arrow"
     | "className"
     | "placement"
@@ -73,31 +53,25 @@ interface MenuContentProps<T>
     | "isOpen"
     | "onOpenChange"
     | "shouldFlip"
+    | "isNonModal"
+    | "trigger"
+    | "getTargetRect"
   >
 }
 
-const menuContentStyles = tv({
+const menuStyles = tv({
   base: "grid max-h-[inherit] grid-cols-[auto_1fr] gap-y-1 overflow-y-auto overflow-x-hidden overscroll-contain p-1 outline-hidden [clip-path:inset(0_0_0_0_round_calc(var(--radius-xl)-(--spacing(1))))] [&>[data-slot=menu-section]+[data-slot=menu-section]:not([class*='mt-']):not([class*='my-'])]:mt-3",
 })
 
-const MenuContent = <T extends object>({
-  className,
-  placement,
-  popover,
-  ...props
-}: MenuContentProps<T>) => {
+const Menu = <T extends object>({ className, placement, popover, ...props }: MenuProps<T>) => {
   return (
-    <PopoverContent
+    <Popover
       className={cx("min-w-32 *:data-[slot=popover-inner]:overflow-hidden", popover?.className)}
       placement={placement}
       {...popover}
     >
-      <MenuPrimitive
-        data-slot="menu-content"
-        className={menuContentStyles({ className })}
-        {...props}
-      />
-    </PopoverContent>
+      <MenuPrimitive data-slot="menu-content" className={menuStyles({ className })} {...props} />
+    </Popover>
   )
 }
 
@@ -114,10 +88,11 @@ const InternalMenuItem = ({ className, intent, children, ...props }: MenuItemPro
           intent,
           className: hasSubmenu
             ? twMerge(
-                intent === "danger" && "open:bg-danger-subtle open:text-danger-subtle-fg",
-                intent === "warning" && "open:bg-warning-subtle open:text-warning-subtle-fg",
+                intent === "danger" && "open:bg-danger-subtle open:text-danger-subtle-foreground",
+                intent === "warning" &&
+                  "open:bg-warning-subtle open:text-warning-subtle-foreground",
                 intent === undefined &&
-                  "open:bg-accent open:text-accent-fg open:*:[.text-muted-fg]:text-accent-fg open:*:[svg]:text-accent-fg",
+                  "open:bg-accent open:text-accent-foreground open:*:[.text-muted-foreground]:text-accent-foreground open:*:[svg]:text-accent-foreground",
                 className,
               )
             : className,
@@ -196,11 +171,10 @@ const MenuShortcut = DropdownKeyboard
 const MenuLabel = DropdownLabel
 const MenuDescription = DropdownDescription
 
-export type { MenuContentProps, MenuItemProps, MenuSectionProps, MenuTriggerProps }
+export type { MenuProps, MenuItemProps, MenuSectionProps }
 
 export {
   Menu,
-  MenuContent,
   MenuDescription,
   MenuHeader,
   MenuItem,
@@ -210,5 +184,5 @@ export {
   MenuShortcut,
   MenuSubMenu,
   MenuTrigger,
-  menuContentStyles,
+  menuStyles,
 }

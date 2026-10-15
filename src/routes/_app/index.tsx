@@ -17,10 +17,10 @@ function HomeComponent() {
               className="outline-hidden"
               isSquare
             />
-            Intent <span className="text-muted-fg">UI</span>
+            Intent <span className="text-muted-foreground">UI</span>
           </div>
         </div>
-        <div className="mt-6 flex items-center justify-center gap-x-2 *:block *:p-2 *:text-primary-subtle-fg *:hover:underline">
+        <div className="mt-6 flex items-center justify-center gap-x-2 *:block *:p-2 *:text-primary-subtle-foreground *:hover:underline">
           <a href="https://intentui.com/docs/components/buttons/button">Docs</a>
           <a href="https://intentui.com/blocks">Blocks</a>
           <a href="https://design.intentui.com/themes">Themes</a>
