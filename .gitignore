@@ -10,7 +10,6 @@ dist/
 .output
 .vercel
 .netlify
-.wrangler
 
 # IDE
 .vscode/*
