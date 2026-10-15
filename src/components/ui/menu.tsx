@@ -1,6 +1,7 @@
 "use client"
 
 import { CheckIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
+import { createLink } from "@tanstack/react-router"
 import { Collection } from "react-aria-components/Collection"
 import { composeRenderProps } from "react-aria-components/composeRenderProps"
 import { Header } from "react-aria-components/Header"
@@ -18,7 +19,9 @@ import {
 } from "react-aria-components/Menu"
 import { twMerge } from "tailwind-merge"
 import { tv, type VariantProps } from "tailwind-variants"
+
 import { cx } from "@/lib/primitive"
+
 import {
   DropdownDescription,
   DropdownKeyboard,
@@ -28,7 +31,6 @@ import {
   dropdownSectionStyles,
 } from "./dropdown"
 import { Popover, type PopoverProps } from "./popover"
-import { createLink } from "@tanstack/react-router"
 
 const MenuTrigger = MenuTriggerPrimitive
 
@@ -60,7 +62,7 @@ interface MenuProps<T> extends MenuPrimitiveProps<T>, Pick<PopoverProps, "placem
 }
 
 const menuStyles = tv({
-  base: "grid max-h-[inherit] grid-cols-[auto_1fr] gap-y-1 overflow-y-auto overflow-x-hidden overscroll-contain p-1 outline-hidden [clip-path:inset(0_0_0_0_round_calc(var(--radius-xl)-(--spacing(1))))] [&>[data-slot=menu-section]+[data-slot=menu-section]:not([class*='mt-']):not([class*='my-'])]:mt-3",
+  base: "grid max-h-[inherit] grid-cols-[auto_1fr] gap-y-1 overflow-x-hidden overflow-y-auto overscroll-contain p-1 outline-hidden [clip-path:inset(0_0_0_0_round_calc(var(--radius-xl)-(--spacing(1))))] [&>[data-slot=menu-section]+[data-slot=menu-section]:not([class*='mt-']):not([class*='my-'])]:mt-3",
 })
 
 const Menu = <T extends object>({ className, placement, popover, ...props }: MenuProps<T>) => {
@@ -132,7 +134,7 @@ export interface MenuHeaderProps extends React.ComponentProps<typeof Header> {
 const MenuHeader = ({ className, separator = false, ...props }: MenuHeaderProps) => (
   <Header
     className={twMerge(
-      "col-span-full px-2.5 py-2 font-medium text-base sm:text-sm",
+      "col-span-full px-2.5 py-2 text-base font-medium sm:text-sm",
       separator && "-mx-1 border-b sm:px-3 sm:pb-2.5",
       className,
     )}

@@ -7,11 +7,13 @@ import {
   Dialog as PrimitiveDialog,
   type DialogProps as DialogPrimitiveProps,
 } from "react-aria-components/Dialog"
-import { Modal, ModalOverlay, type ModalOverlayProps } from "react-aria-components/Modal"
 import { Heading, type HeadingProps } from "react-aria-components/Heading"
+import { Modal, ModalOverlay, type ModalOverlayProps } from "react-aria-components/Modal"
 import type { TextProps } from "react-aria-components/Text"
 import { twMerge } from "tailwind-merge"
+
 import { cx } from "@/lib/primitive"
+
 import { Button, type ButtonProps } from "./button"
 
 const DialogTrigger = DialogTriggerPrimitive
@@ -31,7 +33,8 @@ const sizes = {
 }
 
 export interface DialogProps
-  extends Omit<ModalOverlayProps, "children" | "className">,
+  extends
+    Omit<ModalOverlayProps, "children" | "className">,
     Pick<DialogPrimitiveProps, "aria-label" | "aria-labelledby" | "role" | "children"> {
   className?: string
   size?: keyof typeof sizes
@@ -56,8 +59,8 @@ function Dialog({
       className={cx(
         "fixed top-0 left-0 z-50 h-(--visual-viewport-height,100dvh) w-(--visual-viewport-width,100vw) overflow-clip sm:absolute sm:h-[max(var(--page-height),100dvh)] sm:w-[max(var(--page-width),100vw)]",
         "bg-background/15 backdrop-blur-[1px] motion-reduce:backdrop-blur-none",
-        "entering:fade-in entering:animate-in entering:duration-300 entering:ease-out",
-        "exiting:fade-out exiting:animate-out exiting:fill-mode-forwards exiting:ease-in",
+        "entering:animate-in entering:duration-300 entering:ease-out entering:fade-in",
+        "exiting:animate-out exiting:ease-in exiting:fill-mode-forwards exiting:fade-out",
         overlay?.className,
       )}
       {...props}
@@ -77,10 +80,10 @@ function Dialog({
               ? "**:data-[slot=dialog-body]:min-h-[calc(var(--visual-viewport-height)-var(--visual-viewport-vertical-padding)-var(--dialog-header-height)-var(--dialog-footer-height))] sm:[--visual-viewport-vertical-padding:16px]"
               : "sm:[--visual-viewport-vertical-padding:32px]",
             "relative overflow-hidden bg-overlay text-overlay-foreground",
-            "inset-shadow-xs rounded-t-2xl ring ring-muted-foreground/25 drop-shadow-xl sm:rounded-2xl dark:ring-border",
+            "rounded-t-2xl ring inset-shadow-xs ring-muted-foreground/25 drop-shadow-xl sm:rounded-2xl dark:ring-border",
             sizes[size],
-            "entering:slide-in-from-bottom sm:entering:zoom-in-95 sm:entering:slide-in-from-bottom-0 entering:animate-in entering:duration-300 entering:ease-out",
-            "exiting:slide-out-to-bottom sm:exiting:zoom-out-95 sm:exiting:slide-out-to-bottom-0 exiting:animate-out exiting:fill-mode-forwards exiting:ease-in",
+            "entering:animate-in entering:duration-300 entering:ease-out entering:slide-in-from-bottom sm:entering:slide-in-from-bottom-0 sm:entering:zoom-in-95",
+            "exiting:animate-out exiting:ease-in exiting:fill-mode-forwards exiting:slide-out-to-bottom sm:exiting:slide-out-to-bottom-0 sm:exiting:zoom-out-95",
             className,
           )}
         >
@@ -140,7 +143,7 @@ const DialogTitle = ({ className, ref, ...props }: DialogTitleProps) => (
     slot="title"
     ref={ref}
     className={twMerge(
-      "text-balance font-semibold text-foreground text-lg/6 sm:text-base/6",
+      "text-lg/6 font-semibold text-balance text-foreground sm:text-base/6",
       className,
     )}
     {...props}
@@ -154,7 +157,7 @@ const DialogDescription = ({ className, ref, ...props }: DialogDescriptionProps)
   <p
     data-slot="description"
     className={twMerge(
-      "text-pretty text-base/6 text-muted-foreground group-disabled:opacity-50 sm:text-sm/6",
+      "text-base/6 text-pretty text-muted-foreground group-disabled:opacity-50 sm:text-sm/6",
       className,
     )}
     ref={ref}

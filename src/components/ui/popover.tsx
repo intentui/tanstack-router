@@ -3,7 +3,9 @@ import {
   Popover as PopoverPrimitive,
   type PopoverProps as PopoverPrimitiveProps,
 } from "react-aria-components/Popover"
+
 import { cx } from "@/lib/primitive"
+
 import {
   DialogBody,
   DialogClose,
@@ -33,8 +35,8 @@ const Popover = ({ children, arrow = false, className, ref, ...props }: PopoverP
       className={cx(
         "[--visual-viewport-vertical-padding:16px] sm:[--visual-viewport-vertical-padding:32px]",
         "max-h-[calc(var(--visual-viewport-height)-var(--visual-viewport-vertical-padding)*2)]",
-        "group/popover min-w-(--trigger-width) max-w-xs origin-(--trigger-anchor-point) rounded-(--popover-radius) bg-overlay text-overlay-foreground shadow-xs outline-hidden ring ring-muted-foreground/20 drop-shadow-xl transition-transform [--gutter:--spacing(6)] [--popover-radius:var(--radius-xl)] sm:text-sm dark:ring-border dark:backdrop-saturate-200 **:[[role=dialog]]:[--gutter:--spacing(6)]",
-        "entering:fade-in exiting:fade-out entering:animate-in exiting:animate-out",
+        "group/popover max-w-xs min-w-(--trigger-width) origin-(--trigger-anchor-point) rounded-(--popover-radius) bg-overlay text-overlay-foreground shadow-xs ring ring-muted-foreground/20 outline-hidden drop-shadow-xl transition-transform [--gutter:--spacing(6)] [--popover-radius:var(--radius-xl)] sm:text-sm dark:ring-border dark:backdrop-saturate-200 **:[[role=dialog]]:[--gutter:--spacing(6)]",
+        "entering:animate-in entering:fade-in exiting:animate-out exiting:fade-out",
         "placement-left:entering:slide-in-from-right-1 placement-right:entering:slide-in-from-left-1 placement-top:entering:slide-in-from-bottom-1 placement-bottom:entering:slide-in-from-top-1",
         "placement-left:exiting:slide-out-to-right-1 placement-right:exiting:slide-out-to-left-1 placement-top:exiting:slide-out-to-bottom-1 placement-bottom:exiting:slide-out-to-top-1",
         "forced-colors:bg-[Canvas]",
@@ -50,7 +52,7 @@ const Popover = ({ children, arrow = false, className, ref, ...props }: PopoverP
                 width={12}
                 height={12}
                 viewBox="0 0 12 12"
-                className="block fill-overlay stroke-border group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
+                className="block fill-overlay stroke-border group-placement-left:-rotate-90 group-placement-right:rotate-90 group-placement-bottom:rotate-180 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
               >
                 <path d="M0 0 L6 6 L12 0" />
               </svg>

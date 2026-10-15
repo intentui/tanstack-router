@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
+
 import { Avatar } from "@/components/ui/avatar.tsx"
 
 export const Route = createFileRoute("/_app/")({

@@ -8,13 +8,14 @@ import { Separator, type SeparatorProps } from "react-aria-components/Separator"
 import { Text, type TextProps } from "react-aria-components/Text"
 import { twJoin, twMerge } from "tailwind-merge"
 import { tv } from "tailwind-variants"
+
 import { Keyboard } from "./keyboard"
 
 const dropdownSectionStyles = tv({
   slots: {
     section: "col-span-full grid grid-cols-[auto_1fr]",
     header:
-      "col-span-full px-3 py-2 font-medium text-muted-foreground text-sm/6 sm:px-2.5 sm:py-1.5 sm:text-xs/3",
+      "col-span-full px-3 py-2 text-sm/6 font-medium text-muted-foreground sm:px-2.5 sm:py-1.5 sm:text-xs/3",
   },
 })
 
@@ -42,13 +43,13 @@ const dropdownItemStyles = tv({
     "min-w-0 [--me-icon:--spacing(2.5)] sm:[--me-icon:--spacing(2)]",
     "col-span-full grid grid-cols-[auto_1fr_1.5rem_0.5rem_auto] px-3 py-2 supports-[grid-template-columns:subgrid]:grid-cols-subgrid sm:px-2.5 sm:py-1.5",
     "not-has-[[slot=description]]:items-center",
-    "group relative cursor-default select-none rounded-[calc(var(--radius-xl)-(--spacing(1)))] outline-0",
+    "group relative cursor-default rounded-[calc(var(--radius-xl)-(--spacing(1)))] outline-0 select-none",
     // text
     "text-base/6 text-foreground sm:text-sm/6 forced-colors:text-[CanvasText]",
     // avatar
-    "*:data-[slot=avatar]:*:me-(--me-icon) *:data-[slot=avatar]:me-(--me-icon) has-[[slot=description]]:*:data-[slot=avatar]:row-span-2 *:data-[slot=avatar]:[--avatar-size:--spacing(5)] sm:*:data-[slot=avatar]:[--avatar-size:--spacing(4)]",
+    "*:data-[slot=avatar]:*:me-(--me-icon) *:data-[slot=avatar]:me-(--me-icon) *:data-[slot=avatar]:[--avatar-size:--spacing(5)] has-[[slot=description]]:*:data-[slot=avatar]:row-span-2 sm:*:data-[slot=avatar]:[--avatar-size:--spacing(4)]",
     // icon
-    "[&_svg:not([class*='text-'])]:text-muted-foreground *:[svg:not([data-slot='check-indicator'])]:col-start-1 *:[svg:not([data-slot='check-indicator'])]:row-start-1 *:[svg:not([data-slot='check-indicator'])]:-ms-0.5 *:[svg:not([data-slot='check-indicator'])]:me-(--me-icon) *:[svg]:shrink-0",
+    "[&_svg:not([class*='text-'])]:text-muted-foreground *:[svg]:shrink-0 *:[svg:not([data-slot='check-indicator'])]:col-start-1 *:[svg:not([data-slot='check-indicator'])]:row-start-1 *:[svg:not([data-slot='check-indicator'])]:-ms-0.5 *:[svg:not([data-slot='check-indicator'])]:me-(--me-icon)",
     "not-has-[[slot=description]]:*:[svg]:size-5 sm:not-has-[[slot=description]]:*:[svg]:size-4",
     "has-[[slot=description]]:[&_svg:not([class*='w-'])]:w-5 sm:has-[[slot=description]]:[&_svg:not([class*='w-'])]:w-4 has-[[slot=description]]:*:[svg]:h-lh",
     "[&>[slot=label]+svg:not([data-slot='check-indicator'])]:absolute [&>[slot=label]+svg:not([data-slot='check-indicator'])]:inset-e-0 [&>[slot=label]+svg:not([data-slot='check-indicator'])]:top-1",
@@ -138,7 +139,7 @@ const DropdownLabel = ({ className, ...props }: TextProps) => (
 const DropdownDescription = ({ className, ...props }: TextProps) => (
   <Text
     slot="description"
-    className={twMerge("col-start-2 font-normal text-muted-foreground text-sm", className)}
+    className={twMerge("col-start-2 text-sm font-normal text-muted-foreground", className)}
     {...props}
   />
 )

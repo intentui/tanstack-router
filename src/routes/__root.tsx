@@ -9,7 +9,7 @@ function RootComponent() {
   return (
     <>
       <Outlet />
-      {process.env.NODE_ENV === "development" && <TanStackRouterDevtools position="bottom-right" />}
+      {import.meta.env.DEV && <TanStackRouterDevtools position="bottom-right" />}
     </>
   )
 }
